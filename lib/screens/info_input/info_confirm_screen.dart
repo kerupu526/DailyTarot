@@ -1,3 +1,10 @@
+import 'package:daily_tarot/screens/home/home_screen.dart';
+import 'package:daily_tarot/screens/info_input/age_input_screen.dart';
+import 'package:daily_tarot/screens/info_input/birth_date_input_screen.dart';
+import 'package:daily_tarot/screens/info_input/gender_input_screen.dart';
+import 'package:daily_tarot/screens/info_input/name_input_screen.dart';
+import 'package:daily_tarot/screens/info_input/time_input_screen_dart.dart';
+import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:daily_tarot/widgets/tarot_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -68,7 +75,7 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
                         SizedBox(height: 35,),
                         _buildInfoBox(
                           label: '이름 : $_name',
-                          onTap: () => Navigator.pushNamed(context, '/info_input')
+                          onTap: () => pushPage(context, NameInputScreen())
                         ),
                         SizedBox(height: 15,),
 
@@ -78,7 +85,7 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
                                 flex: 3,
                                 child: _buildInfoBox(
                                     label: '나이 : $_age세',
-                                    onTap: () => Navigator.pushNamed(context, '/info_input_age')
+                                    onTap: () => pushPage(context, AgeInputScreen())
                                 )
                             ),
                             SizedBox(width: 15,),
@@ -86,7 +93,7 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
                               flex: 1,
                               child: _buildGenderBox(
                                   genderCode: _gender,
-                                  onTap: () => Navigator.pushNamed(context, '/info_input_gender')
+                                  onTap: () => pushPage(context, GenderInputScreen())
                               ),
                             )
                           ],
@@ -95,13 +102,13 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
                         
                         _buildInfoBox(
                             label: '생일 : $_birthDate',
-                            onTap: () => Navigator.pushNamed(context, '/info_input_birth')
+                            onTap: () => pushPage(context, BirthDateInputScreen())
                         ),
                         SizedBox(height: 15,),
 
                         _buildInfoBox(
                             label: '태어난 시간 : $_time',
-                            onTap: () => Navigator.pushNamed(context, '/info_input_time')
+                            onTap: () => pushPage(context, TimeInputScreen())
                         ),
                       ],
                     ),
@@ -116,7 +123,7 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, '/home');
+                        pushReplacementPage(context, HomeScreen());
                       },
                       child: Container(
                         padding: .symmetric(horizontal: 55, vertical: 16),

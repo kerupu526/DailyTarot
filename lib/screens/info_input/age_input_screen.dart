@@ -1,3 +1,5 @@
+import 'package:daily_tarot/screens/info_input/gender_input_screen.dart';
+import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,7 +41,7 @@ class _AgeInputScreenState extends State<AgeInputScreen> {
     await prefs.setInt('user_age', age);
 
     if (!mounted) return;
-    Navigator.pushNamed(context, '/info_input_gender');
+    pushPage(context, GenderInputScreen());
   }
 
   @override

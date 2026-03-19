@@ -1,3 +1,5 @@
+import 'package:daily_tarot/screens/info_input/time_input_screen_dart.dart';
+import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -119,7 +121,7 @@ class _BirthDateInputScreenState extends State<BirthDateInputScreen> {
 
     if (!mounted) return;
     // 다음 화면(시간 입력)으로 이동
-    Navigator.pushNamed(context, '/info_input_time');
+    pushPage(context, TimeInputScreen());
   }
 
   @override

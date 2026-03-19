@@ -1,3 +1,5 @@
+import 'package:daily_tarot/screens/info_input/birth_date_input_screen.dart';
+import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +28,7 @@ class _GenderInputScreenState extends State<GenderInputScreen> {
     await Future.delayed(Duration(milliseconds: 300));
 
     if (!mounted) return;
-    Navigator.pushNamed(context, '/info_input_birth_date');
+    pushPage(context, BirthDateInputScreen());
   }
 
   @override

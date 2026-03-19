@@ -1,5 +1,8 @@
+import 'package:daily_tarot/screens/info_input/info_confirm_screen.dart';
+import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../widgets/clock_widget.dart';
 import '../../widgets/tarot_background.dart';
 import '../../widgets/custom_progress_bar.dart';
@@ -17,6 +20,35 @@ class _TimeInputScreenState extends State<TimeInputScreen> {
   int _hour = 9;
   int _minute = 0;
   bool _isSelectingHour = true;
+
+  Future<void> _saveAndNavigate({bool isUnknown = false}) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    int finalHour = _hour;
+    int finalMinute = _minute;
+    bool finalIsAm = _isAm;
+
+    // '잘 모르겠어요' 클릭 시 09:00 AM으로 고정
+    if (isUnknown) {
+      finalHour = 9;
+      finalMinute = 0;
+      finalIsAm = true;
+    }
+
+    // 24시간제로 변환하여 저장
+    int savedHour = finalHour;
+    if (finalIsAm) {
+      if (savedHour == 12) savedHour = 0;
+    } else {
+      if (savedHour != 12) savedHour += 12;
+    }
+
+    String formattedTime = "${savedHour.toString().padLeft(2, '0')}:${finalMinute.toString().padLeft(2, '0')}";
+    await prefs.setString('user_time', formattedTime);
+
+    if (!mounted) return;
+    pushPage(context, InfoConfirmScreen());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -201,6 +233,8 @@ class _TimeInputScreenState extends State<TimeInputScreen> {
                           _isSelectingHour = false;
                         } else {
                           _minute = val;
+                          // --- [수정] 분 선택 시 저장 및 이동 ---
+                          _saveAndNavigate(isUnknown: false);
                         }
                       });
                     },
@@ -227,13 +261,12 @@ class _TimeInputScreenState extends State<TimeInputScreen> {
                   isFlipped: false,
                 ),
                 const SizedBox(width: 16), // 버튼 사이 간격
-                // 2. 잘 모르겠어요 버튼 (선수님 코드 스타일 적용)
+                // 2. 잘 모르겠어요 버튼
                 _buildStyledButton(
                   text: '잘 모르겠어요',
-                  iconPath: 'assets/icons/arrow_back_ios_new_24dp_E3E3E3_FILL0_wght100_GRAD0_opsz24.svg', // 필요시 아이콘 변경
-                  onTap: () {
-                    Navigator.pushNamed(context, '/info_confirm');
-                  },
+                  iconPath: 'assets/icons/arrow_back_ios_new_24dp_E3E3E3_FILL0_wght100_GRAD0_opsz24.svg',
+                  // ---[수정] 09:00으로 저장 및 이동 ---
+                  onTap: () => _saveAndNavigate(isUnknown: true),
                   isFlipped: true,
                 ),
               ],

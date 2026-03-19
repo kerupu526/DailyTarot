@@ -1,3 +1,5 @@
+import 'package:daily_tarot/screens/info_input/age_input_screen.dart';
+import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,7 +39,7 @@ class _NameInputScreenState extends State<NameInputScreen> {
     await prefs.setString('user_name', name);
 
     if (!mounted) return;
-    Navigator.pushNamed(context, '/info_input_age');
+    pushPage(context, AgeInputScreen());
   }
 
   @override

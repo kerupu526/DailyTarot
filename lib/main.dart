@@ -1,11 +1,15 @@
+import 'package:daily_tarot/screens/home/home_screen.dart';
+import 'package:daily_tarot/screens/home/moon_recharge_screen.dart';
 import 'package:daily_tarot/screens/info_input/age_input_screen.dart';
 import 'package:daily_tarot/screens/info_input/birth_date_input_screen.dart';
 import 'package:daily_tarot/screens/info_input/gender_input_screen.dart';
 import 'package:daily_tarot/screens/info_input/info_confirm_screen.dart';
 import 'package:daily_tarot/screens/info_input/time_input_screen_dart.dart';
+import 'package:daily_tarot/screens/tarot/my_soul_card_screen.dart';
+import 'package:daily_tarot/screens/tarot/soul_card_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/info_input/name_input_screen.dart';
-import 'screens/onboarding_screen.dart'; // 방금 만든 파일 import
+import 'screens/onboarding/onboarding_screen.dart'; // 방금 만든 파일 import
 
 void main() {
   runApp(const DailyTarotApp());
@@ -44,8 +48,11 @@ class DailyTarotApp extends StatelessWidget {
         '/info_input_gender': (context) => const GenderInputScreen(),
         '/info_input_birth_date': (context) => const BirthDateInputScreen(),
         '/info_input_time': (context) => const TimeInputScreen(),
-        '/info_confirm': (context) => const InfoConfirmScreen(), // 이거 추가!
-        '/home': (context) => const Scaffold(backgroundColor: Colors.white), // 홈 (빈 화면 요구사항 충족)
+        '/info_confirm': (context) => const InfoConfirmScreen(),
+        '/home': (context) => const HomeScreen(), // 홈 (빈 화면 요구사항 충족)
+        '/moon_recharge': (context) => const MoonRechargeScreen(),
+        '/soul_card': (context) => const SoulCardScreen(),
+        '/my_soul_card_screen': (context) => const MySoulCardScreen()
       },
     );
   }
