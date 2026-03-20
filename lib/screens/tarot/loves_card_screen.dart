@@ -94,10 +94,15 @@ class _LovesTarotScreenState extends State<LovesTarotScreen> {
                         ..translate(0.0, -pivotDistance)
                         ..scale(scale),
                       child: GestureDetector(
-                        onTap: () {
-                          final int tappedIndex = index;
-                          print('카드 $tappedIndex 선택됨');
-                          pushPage(context, const TarotResultScreen(tarotType: 'loves'));
+                        onTap: () async {
+                          final prefs = await SharedPreferences.getInstance();
+
+                          // 🔥 [수정 1] 키 이름을 'selected_love_card_id'로 바꿉니다!
+                          // 🔥 [수정 2] JSON 번호(1~9)와 맞추기 위해 index + 1 을 저장합니다!
+                          await prefs.setInt('selected_love_card_id', index + 1);
+
+                          if (!mounted) return;
+                          pushPage(context, const TarotResultScreen(tarotType: 'love'));
                         },
                         child: Container(
                           width: cardWidth,
