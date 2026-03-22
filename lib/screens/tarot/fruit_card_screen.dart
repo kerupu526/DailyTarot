@@ -138,7 +138,7 @@ class _FruitCardScreenState extends State<FruitCardScreen> {
                               final prefs = await SharedPreferences.getInstance();
                               await prefs.setInt(PrefKeys.selectedFruitId, selectedCardId);
 
-                              if (!mounted) return;
+                              if (!context.mounted) return;
 
                               pushAndRemoveAllPage(context, const TarotResultScreen(tarotType: 'fruit'));
                             },

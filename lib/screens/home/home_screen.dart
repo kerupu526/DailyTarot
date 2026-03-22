@@ -38,24 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
     await prefs.setInt(PrefKeys.moonCount, _moonCount);
   }
 
-  // 요구사항 5: 토스트 메시지 (SnackBar를 토스트처럼 활용)
-  void _showComingSoonToast() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text(
-          '준비 중입니다.',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontFamily: 'NotoSansKR'),
-        ),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.black87,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        margin: const EdgeInsets.only(bottom: 100, left: 50, right: 50),
-        duration: const Duration(seconds: 1),
-      ),
-    );
-  }
-
   // 요구사항 6: 웹 브라우저 띄우기
   Future<void> _launchWikipedia() async {
     final Uri url = Uri.parse('https://ko.wikipedia.org/wiki/타로');

@@ -86,12 +86,12 @@ class _LovesCardScreenState extends State<LovesCardScreen> {
                       alignment: Alignment.bottomCenter,
                       transform: Matrix4.identity()
                       // 1. 중심점(pivot)으로 이동
-                        ..translate(0.0, pivotDistance)
+                        ..translateByDouble(0.0, pivotDistance, 0.0, 0.0)
                       // 2. 그 점 기준으로 회전
                         ..rotateZ(angle)
                       // 3. 다시 원위치
-                        ..translate(0.0, -pivotDistance)
-                        ..scale(scale),
+                        ..translateByDouble(0.0, -pivotDistance, 0.0, 0.0)
+                        ..scaleByDouble(scale, scale, 1.0, 1.0),
                       child: GestureDetector(
                         onTap: () async {
                           final prefs = await SharedPreferences.getInstance();
@@ -100,7 +100,7 @@ class _LovesCardScreenState extends State<LovesCardScreen> {
                           // 🔥 [수정 2] JSON 번호(1~9)와 맞추기 위해 index + 1 을 저장합니다!
                           await prefs.setInt(PrefKeys.selectedLoveId, index + 1);
 
-                          if (!mounted) return;
+                          if (!context.mounted) return;
                           pushAndRemoveAllPage(context, const TarotResultScreen(tarotType: 'love'));
                         },
                         child: Container(
@@ -110,7 +110,7 @@ class _LovesCardScreenState extends State<LovesCardScreen> {
                             borderRadius: BorderRadius.circular(12),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.5),
+                                color: Colors.black.withValues(alpha: 0.5),
                                 blurRadius: 12,
                                 spreadRadius: -3,
                                 offset: const Offset(-5, 5),

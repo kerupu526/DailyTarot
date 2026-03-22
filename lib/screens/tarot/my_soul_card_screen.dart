@@ -19,7 +19,6 @@ class _MySoulCardScreenState extends State<MySoulCardScreen>
     with SingleTickerProviderStateMixin {
   bool _isAnimated = false;
   Map<String, dynamic>? _cardData;
-  String _displayBirthDate = "";
   int _soulNumber = 0;
 
   late AnimationController _flipController;
@@ -61,7 +60,6 @@ class _MySoulCardScreenState extends State<MySoulCardScreen>
     _month = parts[1];
     _day = parts[2];
 
-    _displayBirthDate = birthDateStr.replaceAll('-', '.');
     _soulNumber = _calculateSoulNumber(birthDateStr);
 
     final List<dynamic> dataList = await loadJsonData(
