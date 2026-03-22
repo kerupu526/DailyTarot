@@ -26,7 +26,7 @@ class _AgeInputScreenState extends State<AgeInputScreen> {
 
   void _validateAndSubmit(String value) async {
     final ageStr = value.trim();
-    if (ageStr.isEmpty || int.tryParse(ageStr) == null || int.parse(ageStr) < 0) {
+    if (ageStr.isEmpty || int.tryParse(ageStr) == null || int.parse(ageStr) < 0 || int.parse(ageStr) > 100) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('올바른 나이를 입력해주세요.'),

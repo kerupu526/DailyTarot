@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/screens/info_input/time_input_screen_dart.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
@@ -19,12 +21,21 @@ class BirthDateInputScreen extends StatefulWidget {
 class _BirthDateInputScreenState extends State<BirthDateInputScreen> {
   // 현재 달력에서 보고 있는 연도와 월을 추적 (기본값: 오늘 날짜)
   DateTime _focusedMonth = DateTime.now();
+  int _savedAge = 0;
 
   @override
   void initState() {
     super.initState();
     // 달력은 '일(day)'과 상관없이 해당 월의 1일을 기준으로 계산하는 것이 편합니다.
     _focusedMonth = DateTime(DateTime.now().year, DateTime.now().month, 1);
+    _loadUserAge();
+  }
+
+  Future<void> _loadUserAge() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _savedAge = prefs.getInt(PrefKeys.userAge) ?? 0;
+    });
   }
 
   // 1. 연도와 월을 선택하는 팝업 다이얼로그
@@ -119,6 +130,25 @@ class _BirthDateInputScreenState extends State<BirthDateInputScreen> {
 
   // 3. 날짜 클릭 시 저장 및 다음 화면 이동
   Future<void> _onDateSelected(DateTime date) async {
+    int currentYear = DateTime.now().year;
+
+    int expectedYear1 = currentYear - _savedAge;
+    int expectedYear2 = currentYear - _savedAge + 1;
+
+    if (date.year != expectedYear1 && date.year != expectedYear2) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            '입력하신 나이($_savedAge세)와 맞지 않는 연도입니다.\n올바른 생년월일을 선택해주세요.',
+            style: AppTextStyles.bodyDefault.copyWith(fontFamily: 'NotoSansKR'),
+          ),
+          backgroundColor: Colors.redAccent.withValues(alpha: 0.9),
+          behavior: .floating,
+        )
+      );
+      return;
+    }
+
     final prefs = await SharedPreferences.getInstance();
     // 날짜를 YYYY-MM-DD 형태로 저장
     String formattedDate = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";

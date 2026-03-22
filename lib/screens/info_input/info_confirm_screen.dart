@@ -8,6 +8,7 @@ import 'package:daily_tarot/screens/info_input/name_input_screen.dart';
 import 'package:daily_tarot/screens/info_input/time_input_screen_dart.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:daily_tarot/widgets/tarot_background.dart';
+import 'package:daily_tarot/widgets/tarot_gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -121,41 +122,7 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
                   left: 0,
                   right: 0,
                   child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        pushReplacementPage(context, HomeScreen());
-                      },
-                      child: Container(
-                        padding: .symmetric(horizontal: 55, vertical: 16),
-                        decoration: BoxDecoration(
-                          borderRadius: .circular(50),
-                          gradient: LinearGradient(
-                            begin: Alignment(-1, -0.8),
-                            end: Alignment(0, 1),
-                            colors: [AppColors.buttonStart, AppColors.buttonMiddle, AppColors.buttonEnd],
-                          ),
-                          boxShadow: const[BoxShadow(color: AppColors.buttonShadow, blurRadius: 3, offset: Offset(0, 6))],
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min, // 내용물 크기만큼만 가로 차지
-                          children:[
-                            const Text(
-                              '시작하기', // ">" 기호 제거
-                              style: AppTextStyles.boldText
-                            ),
-                            // 제공된 arrow_back 아이콘을 180도 회전시켜서 사용
-                            Transform.rotate(
-                              angle: 3.14159, // 180도 (pi)
-                              child: SvgPicture.asset(
-                                'assets/icons/arrow_back_ios_new_24dp_E3E3E3_FILL0_wght100_GRAD0_opsz24.svg',
-                                width: 20,
-                                height: 20,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    child: TarotGradientButton(text: '시작하기', showRightArrow: true, onTap: () => pushAndRemoveAllPage(context, HomeScreen()))
                   ))
           ],
         ));

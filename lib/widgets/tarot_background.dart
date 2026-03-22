@@ -23,7 +23,7 @@ class TarotBackground extends StatelessWidget {
         // 달
         Positioned(
           top: size.height * 0.04,
-          left: -10,
+          left: -8,
           child: Image.asset('assets/images/moon.png', width: 150, fit: BoxFit.contain),
         ),
         // 구름 1

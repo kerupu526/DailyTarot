@@ -101,7 +101,7 @@ class _LovesCardScreenState extends State<LovesCardScreen> {
                           await prefs.setInt(PrefKeys.selectedLoveId, index + 1);
 
                           if (!mounted) return;
-                          pushPage(context, const TarotResultScreen(tarotType: 'love'));
+                          pushAndRemoveAllPage(context, const TarotResultScreen(tarotType: 'love'));
                         },
                         child: Container(
                           width: cardWidth,

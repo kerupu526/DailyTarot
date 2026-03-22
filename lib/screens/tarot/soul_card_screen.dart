@@ -3,6 +3,7 @@ import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/constants/pref_keys.dart';
 import 'package:daily_tarot/screens/tarot/my_soul_card_screen.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
+import 'package:daily_tarot/widgets/tarot_gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart'; // 휠 스크롤 달력을 위해 추가
 import 'package:flutter_svg/svg.dart';
@@ -351,7 +352,7 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
 
     if (!mounted) return;
 
-    pushPage(context, MySoulCardScreen());
+    pushAndRemoveAllPage(context, MySoulCardScreen());
   }
 
   @override
@@ -453,31 +454,7 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
             child: Column(
               children:[
                 // 달 10개로 찾기 버튼
-                GestureDetector(
-                  onTap: _checkAndNavigate,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      gradient: const LinearGradient(
-                        begin: Alignment(-1, -0.8), end: Alignment(0, 1),
-                        colors:[AppColors.buttonStart, AppColors.buttonMiddle, AppColors.buttonEnd],
-                      ),
-                      boxShadow: const[BoxShadow(color: AppColors.buttonShadow, blurRadius: 5, offset: Offset(0, 6))],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:[
-                        Image.asset('assets/images/moon.png', width: 20, height: 20),
-                        const SizedBox(width: 10),
-                        const Text(
-                          '달 10개로 소울카드 찾기',
-                          style: AppTextStyles.boldText,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                TarotGradientButton(text: '달 10개로 소울카드 찾기', prefixIcon: Image.asset('assets/images/moon.png', width: 20,), onTap: _checkAndNavigate),
 
                 const SizedBox(height: 10),
 

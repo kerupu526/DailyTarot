@@ -141,7 +141,7 @@ class _FruitCardScreenState extends State<FruitCardScreen> {
 
                               if (!mounted) return;
 
-                              pushPage(context, const TarotResultScreen(tarotType: 'fruit'));
+                              pushAndRemoveAllPage(context, const TarotResultScreen(tarotType: 'fruit'));
                             },
                             child: Image.asset('assets/images/tarot_card_back.png'),
                           ),

@@ -4,6 +4,7 @@ import 'package:daily_tarot/screens/home/home_screen.dart';
 import 'package:daily_tarot/services/json_service.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:daily_tarot/widgets/home_background.dart';
+import 'package:daily_tarot/widgets/tarot_gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -195,20 +196,7 @@ class _TarotResultScreenState extends State<TarotResultScreen> {
                 opacity: _isRevealed ? 0.0 : 1.0,
                 duration: const Duration(milliseconds: 600),
                 child: Center(
-                  child: GestureDetector(
-                    onTap: () => setState(() => _isRevealed = true),
-                    child: Container(
-                      width: 140, height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        gradient: const LinearGradient(
-                          begin: Alignment(-1, -0.8), end: Alignment(0, 1),
-                          colors:[AppColors.buttonStart, AppColors.buttonMiddle, AppColors.buttonEnd],
-                        ),
-                      ),
-                      child: const Center(child: Text('결과 확인', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
-                    ),
-                  ),
+                  child: TarotGradientButton(text: '결과 확인', onTap: () => setState(() => _isRevealed = true))
                 ),
               ),
             ),
