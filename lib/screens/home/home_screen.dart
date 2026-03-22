@@ -1,4 +1,6 @@
 import 'package:daily_tarot/screens/home/moon_recharge_screen.dart';
+import 'package:daily_tarot/screens/tarot/fruit_card_screen.dart';
+import 'package:daily_tarot/screens/tarot/loves_card_screen.dart';
 import 'package:daily_tarot/screens/tarot/soul_card_screen.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
@@ -255,6 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: "인연 타로",
             desc: "지금은 힘들지만 그래도,\n그 사람과 인연이 될 수 있을까?",
             isBottomLeft: true, // 왼쪽 아래
+            page: LovesCardScreen()
           ),
           const SizedBox(width: 16),
           // 열매 타로 카드 (요구사항 5-5: 왼쪽 위 정렬)
@@ -265,6 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: "열매 타로",
             desc: "지금 생각하고 있는 일은\n어떤 결과로 이어질까?",
             isBottomLeft: false, // 왼쪽 위
+            page: FruitCardScreen()
           ),
         ],
       ),
@@ -277,9 +281,12 @@ class _HomeScreenState extends State<HomeScreen> {
     required String title,
     required String desc,
     required bool isBottomLeft,
+    required Widget page
   }) {
     return GestureDetector(
-      onTap: _showComingSoonToast, // 요구사항 5: 준비 중 토스트
+      onTap: () {
+        pushPage(context, page);
+      },
       child: Container(
         width: width,
         decoration: BoxDecoration(

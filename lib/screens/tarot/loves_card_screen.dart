@@ -2,15 +2,16 @@ import 'package:daily_tarot/screens/tarot/tarot_result_screen.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_tarot/widgets/home_background.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LovesTarotScreen extends StatefulWidget {
-  const LovesTarotScreen({super.key});
+class LovesCardScreen extends StatefulWidget {
+  const LovesCardScreen({super.key});
 
   @override
-  State<LovesTarotScreen> createState() => _LovesTarotScreenState();
+  State<LovesCardScreen> createState() => _LovesCardScreenState();
 }
 
-class _LovesTarotScreenState extends State<LovesTarotScreen> {
+class _LovesCardScreenState extends State<LovesCardScreen> {
   static const int cardCount = 9;
   static const double angleStep = 0.1;       // 카드 간 각도
   static const double dragSensitivity = 30.0; // 드래그 민감도
