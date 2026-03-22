@@ -1,3 +1,4 @@
+import 'package:daily_tarot/constants/app_colors.dart';
 import 'package:daily_tarot/screens/home/home_screen.dart';
 import 'package:daily_tarot/screens/info_input/age_input_screen.dart';
 import 'package:daily_tarot/screens/info_input/birth_date_input_screen.dart';
@@ -9,6 +10,8 @@ import 'package:daily_tarot/widgets/tarot_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../constants/pref_keys.dart';
 
 class InfoConfirmScreen extends StatefulWidget {
   const InfoConfirmScreen({super.key});
@@ -34,13 +37,13 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
   Future<void> _loadUserData() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _name = prefs.getString('user_name') ?? '알 수 없음';
-      _age = (prefs.getInt('user_age') ?? 0).toString();
-      _gender = prefs.getString('user_gender') ?? 'M';
+      _name = prefs.getString(PrefKeys.userName) ?? '알 수 없음';
+      _age = (prefs.getInt(PrefKeys.userAge) ?? 0).toString();
+      _gender = prefs.getString(PrefKeys.userGender) ?? 'M';
 
-      String rawDate = prefs.getString('user_birth_date') ?? '2000-01-01';
+      String rawDate = prefs.getString(PrefKeys.userDate) ?? '2000-01-01';
       _birthDate = rawDate.replaceAll('-', '.');
-      _time = prefs.getString('user_time') ?? '00:00';
+      _time = prefs.getString(PrefKeys.userTime) ?? '00:00';
 
       _isLoading = false;
     });
@@ -132,7 +135,7 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
                           gradient: LinearGradient(
                             begin: Alignment(-1, -0.8),
                             end: Alignment(0, 1),
-                            colors: [Color(0xFF806381), Color(0xFF745074), Color(0xFF432267)],
+                            colors: [AppColors.buttonStart, AppColors.buttonMiddle, AppColors.buttonEnd],
                           ),
                           boxShadow: const[BoxShadow(color: Color(0x90846881), blurRadius: 3, offset: Offset(0, 6))],
                         ),

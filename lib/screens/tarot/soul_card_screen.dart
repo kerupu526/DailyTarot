@@ -1,3 +1,5 @@
+import 'package:daily_tarot/constants/app_colors.dart';
+import 'package:daily_tarot/constants/pref_keys.dart';
 import 'package:daily_tarot/screens/tarot/my_soul_card_screen.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,7 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
   Future<void> _loadMoonCount() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _currentMoons = prefs.getInt('moon_count') ?? 10;
+      _currentMoons = prefs.getInt(PrefKeys.moonCount) ?? 10;
     });
   }
 
@@ -312,11 +314,11 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
     // 통과 시 10개 차감 및 저장
     setState(() => _currentMoons -= 10);
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('moon_count', _currentMoons);
+    await prefs.setInt(PrefKeys.moonCount, _currentMoons);
 
     // 선택된 생년월일을 다음 화면(애니메이션+결과)으로 전달하기 위해 저장
     String formattedDate = "${_selectedDate!.year}-${_selectedDate!.month.toString().padLeft(2, '0')}-${_selectedDate!.day.toString().padLeft(2, '0')}";
-    await prefs.setString('soul_card_date', formattedDate);
+    await prefs.setString(PrefKeys.soulDate, formattedDate);
 
     if (!mounted) return;
 
@@ -370,11 +372,11 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
                       // 기본 텍스트 스타일
                       style: TextStyle(color: Colors.white, fontSize: 13, height: 2.2, fontFamily: 'NotoSansKR'),
                       children:[
-                        TextSpan(text: '소울 넘버', style: TextStyle(color: Color(0xFFFFD600), fontWeight: FontWeight.bold)),
+                        TextSpan(text: '소울 넘버', style: TextStyle(color: AppColors.highlightYellow, fontWeight: FontWeight.bold)),
                         TextSpan(text: '는 생년월일의 숫자를 모두 더해\n얻는 최종적인 한 자리 숫자로,\n당신의 핵심적인 에너지와 삶의 테마를 나타냅니다.\n이 소울 넘버에 해당하는\n메이저 아르카나 타로 카드가 바로 '),
-                        TextSpan(text: '소울 카드', style: TextStyle(color: Color(0xFFFFD600), fontWeight: FontWeight.bold)),
+                        TextSpan(text: '소울 카드', style: TextStyle(color: AppColors.highlightYellow, fontWeight: FontWeight.bold)),
                         TextSpan(text: '이며,\n이는 당신의 타고난 성격, 기질,\n그리고 삶의 목적을 상징합니다.\n즉, 소울 넘버는 당신의 '),
-                        TextSpan(text: '영혼의 번호', style: TextStyle(color: Color(0xFFFFD600), fontWeight: FontWeight.bold)),
+                        TextSpan(text: '영혼의 번호', style: TextStyle(color: AppColors.highlightYellow, fontWeight: FontWeight.bold)),
                         TextSpan(text: '이고,\n소울 카드는 그 번호가 의미하는\n'),
                         TextSpan(text: '영혼의 본질', style: TextStyle(color: Color(0xFFFFD600), fontWeight: FontWeight.bold)),
                         TextSpan(text: '을 보여주는 상징인 셈입니다.'),
@@ -428,7 +430,7 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
                       borderRadius: BorderRadius.circular(50),
                       gradient: const LinearGradient(
                         begin: Alignment(-1, -0.8), end: Alignment(0, 1),
-                        colors:[Color(0xFF806381), Color(0xFF745074), Color(0xFF432267)],
+                        colors:[AppColors.buttonStart, AppColors.buttonMiddle, AppColors.buttonEnd],
                       ),
                       boxShadow: const[BoxShadow(color: Color(0x90846881), blurRadius: 5, offset: Offset(0, 6))],
                     ),

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:daily_tarot/constants/pref_keys.dart';
 import 'package:daily_tarot/screens/home/home_screen.dart';
 import 'package:daily_tarot/services/json_service.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
@@ -46,7 +47,7 @@ class _MySoulCardScreenState extends State<MySoulCardScreen>
 
   Future<void> _loadSoulCardData() async {
     final prefs = await SharedPreferences.getInstance();
-    String? birthDateStr = prefs.getString('soul_card_date');
+    String? birthDateStr = prefs.getString(PrefKeys.soulDate);
 
     if (birthDateStr == null) {
       setState(() => _cardData = {});

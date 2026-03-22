@@ -1,3 +1,4 @@
+import 'package:daily_tarot/constants/pref_keys.dart';
 import 'package:daily_tarot/widgets/home_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -33,7 +34,7 @@ class _MoonRechargeScreenState extends State<MoonRechargeScreen> {
   Future<void> _loadCurrentMoons() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _currentMoons = prefs.getInt('moon_count') ?? 10;
+      _currentMoons = prefs.getInt(PrefKeys.moonCount) ?? 10;
     });
   }
 
@@ -44,7 +45,7 @@ class _MoonRechargeScreenState extends State<MoonRechargeScreen> {
     setState(() {
       _currentMoons += addedAmount;
     });
-    await prefs.setInt('moon_count', _currentMoons); // 로컬 저장
+    await prefs.setInt(PrefKeys.moonCount, _currentMoons); // 로컬 저장
 
     if (!mounted) return;
 

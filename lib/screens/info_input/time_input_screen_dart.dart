@@ -3,7 +3,9 @@ import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../constants/pref_keys.dart';
 import '../../widgets/clock_widget.dart';
+import '../../widgets/tarot_action_button.dart';
 import '../../widgets/tarot_background.dart';
 import '../../widgets/custom_progress_bar.dart';
 
@@ -44,7 +46,7 @@ class _TimeInputScreenState extends State<TimeInputScreen> {
     }
 
     String formattedTime = "${savedHour.toString().padLeft(2, '0')}:${finalMinute.toString().padLeft(2, '0')}";
-    await prefs.setString('user_time', formattedTime);
+    await prefs.setString(PrefKeys.userTime, formattedTime);
 
     if (!mounted) return;
     pushPage(context, InfoConfirmScreen());
@@ -254,7 +256,7 @@ class _TimeInputScreenState extends State<TimeInputScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // 1. 이전 버튼 (선수님 코드 스타일)
-                _buildStyledButton(
+                TarotActionButton(
                   text: '이전',
                   iconPath: 'assets/icons/arrow_back_ios_new_24dp_E3E3E3_FILL0_wght100_GRAD0_opsz24.svg',
                   onTap: () => Navigator.pop(context),
@@ -262,7 +264,7 @@ class _TimeInputScreenState extends State<TimeInputScreen> {
                 ),
                 const SizedBox(width: 16), // 버튼 사이 간격
                 // 2. 잘 모르겠어요 버튼
-                _buildStyledButton(
+                TarotActionButton(
                   text: '잘 모르겠어요',
                   iconPath: 'assets/icons/arrow_back_ios_new_24dp_E3E3E3_FILL0_wght100_GRAD0_opsz24.svg',
                   // ---[수정] 09:00으로 저장 및 이동 ---
@@ -281,52 +283,6 @@ class _TimeInputScreenState extends State<TimeInputScreen> {
             child: CustomProgressBar(currentStep: 5),
           ),
         ],
-      ),
-    );
-  }
-
-  // 버튼 공통 컴포넌트
-  Widget _buildStyledButton({
-    required String text,
-    required String iconPath,
-    required VoidCallback onTap,
-    bool isFlipped = false, // true면 아이콘이 오른쪽으로, false면 왼쪽으로
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.05),
-          borderRadius: BorderRadius.circular(60),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // isFlipped가 false면 아이콘이 왼쪽에 (이전 버튼)
-            if (!isFlipped) ...[
-              SvgPicture.asset(iconPath, width: 20, height: 20),
-              const SizedBox(width: 6),
-            ],
-
-            Text(
-              text,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontFamily: 'NotoSansKR',
-              ),
-            ),
-
-            // isFlipped가 true면 아이콘이 오른쪽에 (잘 모르겠어요 버튼)
-            if (isFlipped) ...[
-              const SizedBox(width: 6),
-              Transform.flip(
-                  flipX: true,
-                  child: SvgPicture.asset(iconPath, width: 20, height: 20)),
-            ],
-          ],
-        ),
       ),
     );
   }

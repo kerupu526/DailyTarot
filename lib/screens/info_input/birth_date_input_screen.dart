@@ -3,6 +3,7 @@ import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../constants/pref_keys.dart';
 import '../../widgets/tarot_background.dart';
 import '../../widgets/custom_progress_bar.dart';
 
@@ -117,7 +118,7 @@ class _BirthDateInputScreenState extends State<BirthDateInputScreen> {
     final prefs = await SharedPreferences.getInstance();
     // 날짜를 YYYY-MM-DD 형태로 저장
     String formattedDate = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-    await prefs.setString('user_birth_date', formattedDate);
+    await prefs.setString(PrefKeys.userDate, formattedDate);
 
     if (!mounted) return;
     // 다음 화면(시간 입력)으로 이동

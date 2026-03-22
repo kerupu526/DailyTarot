@@ -1,3 +1,4 @@
+import 'package:daily_tarot/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TarotBackground extends StatelessWidget {
@@ -93,7 +94,7 @@ class TarotBackground extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors:[Color(0xFF351A5A), Color(0xFF140822)],
+            colors:[AppColors.backgroundTop, AppColors.backgroundBottom],
           ),
         ),
         child: Stack(

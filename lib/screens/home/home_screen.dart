@@ -1,3 +1,4 @@
+import 'package:daily_tarot/constants/pref_keys.dart';
 import 'package:daily_tarot/screens/home/moon_recharge_screen.dart';
 import 'package:daily_tarot/screens/tarot/soul_card_screen.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
@@ -27,10 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       // 저장된 값이 없으면 기본값 10 지급
-      _moonCount = prefs.getInt('moon_count') ?? 10;
+      _moonCount = prefs.getInt(PrefKeys.moonCount) ?? 10;
     });
     // 초기화용 저장 (없을 경우를 대비)
-    await prefs.setInt('moon_count', _moonCount);
+    await prefs.setInt(PrefKeys.moonCount, _moonCount);
   }
 
   // 요구사항 5: 토스트 메시지 (SnackBar를 토스트처럼 활용)

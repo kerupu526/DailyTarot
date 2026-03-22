@@ -3,6 +3,7 @@ import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../constants/pref_keys.dart';
 import '../../widgets/tarot_background.dart';
 import '../../widgets/custom_progress_bar.dart';
 
@@ -36,7 +37,7 @@ class _NameInputScreenState extends State<NameInputScreen> {
     }
     // TODO: 데이터 저장 후 나이 입력 화면으로 이동
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('user_name', name);
+    await prefs.setString(PrefKeys.userName, name);
 
     if (!mounted) return;
     pushPage(context, AgeInputScreen());

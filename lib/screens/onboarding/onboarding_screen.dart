@@ -1,3 +1,4 @@
+import 'package:daily_tarot/constants/app_colors.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -92,7 +93,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       gradient: const LinearGradient(
                         begin: Alignment(-1, -0.8),
                         end: Alignment(0, 1),
-                        colors:[Color(0xFF806381), Color(0xFF745074), Color(0xFF432267)],
+                        colors:[AppColors.buttonStart, AppColors.buttonMiddle, AppColors.buttonEnd],
                       ),
                       boxShadow: const[BoxShadow(color: Color(0x90846881), blurRadius: 3, offset: Offset(0, 6))],
                     ),
