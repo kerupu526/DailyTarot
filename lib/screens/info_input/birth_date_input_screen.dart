@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/screens/info_input/time_input_screen_dart.dart';

@@ -123,7 +123,7 @@ class _MySoulCardScreenState extends State<MySoulCardScreen>
       );
     }
 
-    String _formatStoryTelling(String text) {
+    String formatStoryTelling(String text) {
       List<String> sentences = text.split('. ');
 
       List<String> result = [];
@@ -280,7 +280,7 @@ class _MySoulCardScreenState extends State<MySoulCardScreen>
                     width: size.width - 70, // 좌우 여백 40씩 총 80을 뺌
                     // TODO: 본문 텍스트
                     child: Text(
-                      _formatStoryTelling(_cardData!['storytelling']),
+                      formatStoryTelling(_cardData!['storytelling']),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Colors.white,

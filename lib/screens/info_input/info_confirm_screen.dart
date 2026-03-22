@@ -1,4 +1,3 @@
-import 'package:daily_tarot/constants/app_colors.dart';
 import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/screens/home/home_screen.dart';
 import 'package:daily_tarot/screens/info_input/age_input_screen.dart';

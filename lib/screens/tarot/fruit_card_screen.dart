@@ -1,7 +1,6 @@
 import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:daily_tarot/widgets/home_background.dart';
-import 'package:daily_tarot/widgets/tarot_background.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,8 +15,8 @@ class FruitCardScreen extends StatefulWidget {
 }
 
 class _FruitCardScreenState extends State<FruitCardScreen> {
-  List<bool> _isCardCentered = List.generate(9, (index) => false);
-  List<int> _cardIndices = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  final List<bool> _isCardCentered = List.generate(9, (index) => false);
+  final List<int> _cardIndices = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
   Offset _calculateCardPosition(int index, double gridWidth, double gridHeight, double cardWidth, double cardHeight) {
     // 만약 셔플 중이면? 무조건 정중앙 좌표 반환

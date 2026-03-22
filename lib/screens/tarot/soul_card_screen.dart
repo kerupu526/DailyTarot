@@ -5,7 +5,7 @@ import 'package:daily_tarot/screens/tarot/my_soul_card_screen.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:daily_tarot/widgets/tarot_gradient_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart'; // 휠 스크롤 달력을 위해 추가
+// 휠 스크롤 달력을 위해 추가
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../widgets/home_background.dart';

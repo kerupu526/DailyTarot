@@ -61,7 +61,7 @@ class ClockWidget extends StatelessWidget {
                 ),
                 alignment: .center,
                 child: Text(
-                  isHourMode ? '$value' : '${value.toString().padLeft(2, '0')}',
+                  isHourMode ? '$value' : value.toString().padLeft(2, '0'),
                   style: AppTextStyles.bodyDefault.copyWith(
                       fontFamily: '나눔명조'
                   )

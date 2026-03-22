@@ -1,9 +1,7 @@
-import 'package:daily_tarot/constants/app_colors.dart';
 import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:daily_tarot/widgets/tarot_gradient_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../widgets/tarot_background.dart';
 import '../info_input/name_input_screen.dart'; // 공통 배경 위젯 import (경로 확인 필수!)
 
