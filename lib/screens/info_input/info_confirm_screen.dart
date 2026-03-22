@@ -1,4 +1,5 @@
 import 'package:daily_tarot/constants/app_colors.dart';
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/screens/home/home_screen.dart';
 import 'package:daily_tarot/screens/info_input/age_input_screen.dart';
 import 'package:daily_tarot/screens/info_input/birth_date_input_screen.dart';
@@ -69,11 +70,7 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
                         SizedBox(height: size.height * 0.01),
                         Text(
                           "입력한 정보가 맞는지 확인해주세요.",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: .w800,
-                          ),
+                          style: AppTextStyles.boldText
                         ),
                         SizedBox(height: 35,),
                         _buildInfoBox(
@@ -85,13 +82,13 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
                         Row(
                           children: [
                             Expanded(
-                                flex: 3,
+                                flex: 4,
                                 child: _buildInfoBox(
                                     label: '나이 : $_age세',
                                     onTap: () => pushPage(context, AgeInputScreen())
                                 )
                             ),
-                            SizedBox(width: 15,),
+                            SizedBox(width: 12,),
                             Expanded(
                               flex: 1,
                               child: _buildGenderBox(
@@ -137,18 +134,14 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
                             end: Alignment(0, 1),
                             colors: [AppColors.buttonStart, AppColors.buttonMiddle, AppColors.buttonEnd],
                           ),
-                          boxShadow: const[BoxShadow(color: Color(0x90846881), blurRadius: 3, offset: Offset(0, 6))],
+                          boxShadow: const[BoxShadow(color: AppColors.buttonShadow, blurRadius: 3, offset: Offset(0, 6))],
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min, // 내용물 크기만큼만 가로 차지
                           children:[
                             const Text(
                               '시작하기', // ">" 기호 제거
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: AppTextStyles.boldText
                             ),
                             // 제공된 arrow_back 아이콘을 180도 회전시켜서 사용
                             Transform.rotate(
@@ -182,7 +175,7 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
         child: Text(
           label,
           textAlign: .start,
-          style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'NotoSansKR'),
+          style: AppTextStyles.bodyDefault
         ),
       ),
     );
@@ -196,13 +189,13 @@ class _InfoConfirmScreenState extends State<InfoConfirmScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: .symmetric(vertical: 14),
+        padding: .symmetric(vertical: 12),
         decoration: BoxDecoration(
           color: Colors.transparent,
           border: .all(color: Colors.white.withValues(alpha: 0.5), width: 1),
-          borderRadius: .circular(30)
+          borderRadius: .circular(40)
         ),
-        child: SvgPicture.asset(iconPath, width: 24, height: 24),
+        child: SvgPicture.asset(iconPath, width: 32, height: 32),
       ),
     );
   }

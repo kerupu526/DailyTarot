@@ -1,4 +1,5 @@
 import 'package:daily_tarot/constants/app_colors.dart';
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -67,10 +68,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             right: 0,
             child: FadeTransition(
               opacity: _logoTextAnimation, // 텍스트도 같이 나타남
-              child: const Center(
+              child: Center(
                 child: Text(
                   "운명을 엿볼 시간이에요.",
-                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
+                  style: AppTextStyles.bodyMedium.copyWith(
+                      fontFamily: '나눔명조',
+                  )
                 ),
               ),
             ),
@@ -95,18 +98,17 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         end: Alignment(0, 1),
                         colors:[AppColors.buttonStart, AppColors.buttonMiddle, AppColors.buttonEnd],
                       ),
-                      boxShadow: const[BoxShadow(color: Color(0x90846881), blurRadius: 3, offset: Offset(0, 6))],
+                      boxShadow: const[BoxShadow(color: AppColors.buttonShadow, blurRadius: 3, offset: Offset(0, 6))],
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min, // 내용물 크기만큼만 가로 차지
                       children:[
-                        const Text(
+                        Text(
                           '시작하기', // ">" 기호 제거
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: AppTextStyles.bodyDefault.copyWith(
+                            fontFamily: '나눔명조',
+                            fontWeight: .bold
+                          )
                         ),
                         // 제공된 arrow_back 아이콘을 180도 회전시켜서 사용
                         Transform.rotate(

@@ -1,3 +1,4 @@
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -36,11 +37,7 @@ class TarotActionButton extends StatelessWidget {
 
             Text(
               text,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontFamily: 'NotoSansKR',
-              ),
+              style: AppTextStyles.bodyMedium
             ),
 
             // isFlipped가 true면 아이콘이 오른쪽에 (잘 모르겠어요 버튼)

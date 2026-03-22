@@ -1,3 +1,4 @@
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/screens/info_input/birth_date_input_screen.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
@@ -52,11 +53,7 @@ class _GenderInputScreenState extends State<GenderInputScreen> {
                     // 안내 텍스트 (로고 바로 아래 중앙 정렬)
                     const Text(
                       "성별을 선택해주세요.",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                      ),
+                      style: AppTextStyles.boldText
                     ),
 
                     // 프로토타입처럼 텍스트와 입력창 사이에 넉넉한 간격
@@ -109,11 +106,7 @@ class _GenderInputScreenState extends State<GenderInputScreen> {
                       SizedBox(width: 6), // 아이콘과 글자 사이의 간격
                       Text(
                         '이전',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: 'NotoSansKR'
-                        ),
+                        style: AppTextStyles.bodyDefault
                       ),
                     ],
                   ),

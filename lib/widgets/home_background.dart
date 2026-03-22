@@ -11,7 +11,7 @@ class HomeBackground extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF2C1654),
+      backgroundColor: AppColors.homeBackground,
       body: Container(
         width: double.infinity,
         height: double.infinity,

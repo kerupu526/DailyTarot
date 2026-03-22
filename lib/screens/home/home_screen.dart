@@ -1,3 +1,5 @@
+import 'package:daily_tarot/constants/app_colors.dart';
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/constants/pref_keys.dart';
 import 'package:daily_tarot/screens/home/moon_recharge_screen.dart';
 import 'package:daily_tarot/screens/tarot/fruit_card_screen.dart';
@@ -134,13 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Image.asset('assets/images/moon.png', width: 32, height: 32),
                   Text(
                     '$_moonCount',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: -0.4,
-                      fontFamily: 'NotoSansKR',
-                    ),
+                    style: AppTextStyles.etcText.copyWith(fontFamily: 'NotoSansKR', fontWeight: .bold)
                   ),
                 ],
               ),
@@ -157,12 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Text(
         title,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontFamily: '나눔명조',
-          fontWeight: FontWeight.bold,
-        ),
+        style: AppTextStyles.extraLargeBold
       ),
     );
   }
@@ -179,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.circular(15),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x908F6890),
+              color: AppColors.soulCardShadow,
               blurRadius: 12,
               blurStyle: .outer,
             ),
@@ -215,22 +206,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: const [
                   Text(
                     "Soul Card",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppTextStyles.largeBold
                   ),
                   SizedBox(height: 4),
                   Text(
                     "운명적인 나만의 데일리 카드!\n매일 하루를 카운셀링 받으세요.",
                     textAlign: TextAlign.right,
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 12,
-                      fontWeight: .w800,
-                      letterSpacing: -0.4,
-                    ),
+                    style: AppTextStyles.miniBold
                   ),
                 ],
               ),
@@ -315,23 +297,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'NotoSansKR',
-                    ),
+                    style: AppTextStyles.largeBold.copyWith(
+                      fontFamily: 'NotoSansKR'
+                    )
                   ),
                   const SizedBox(height: 2),
                   Text(
                     desc,
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 12,
-                      fontWeight: .w600,
-                      letterSpacing: -0.4,
-                      fontFamily: 'NotoSansKR',
-                    ),
+                    style: AppTextStyles.miniBold.copyWith(
+                        fontFamily: 'NotoSansKR'
+                    )
                   ),
                 ],
               ),
@@ -351,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
         height: 200,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          boxShadow: const [BoxShadow(color: Color(0xC8846485), blurRadius: 4)],
+          boxShadow: const [BoxShadow(color: AppColors.buttonShadow, blurRadius: 4)],
           image: const DecorationImage(
             image: AssetImage('assets/images/daily_master.png'), // 에셋명 확인 필수
             fit: BoxFit.cover,
@@ -371,23 +346,15 @@ class _HomeScreenState extends State<HomeScreen> {
               left: 15,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "당신만을 위한 상담",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppTextStyles.extraLargeBold
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   Text(
                     "당신을 위해 모인 '데일리마스터'와\n직접 이야기를 나누어 보세요.",
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 15,
-                      fontWeight: .w600,
-                    ),
+                    style: AppTextStyles.descText
                   ),
                 ],
               ),

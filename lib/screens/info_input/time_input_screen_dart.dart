@@ -1,3 +1,4 @@
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/screens/info_input/info_confirm_screen.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,7 @@ class _TimeInputScreenState extends State<TimeInputScreen> {
                 SizedBox(height: size.height * 0.32),
                 const Text(
                   "태어난 시간을 입력해주세요.",
-                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800),
+                  style: AppTextStyles.boldText,
                 ),
                 const SizedBox(height: 30),
 

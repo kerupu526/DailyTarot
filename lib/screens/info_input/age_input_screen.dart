@@ -1,3 +1,4 @@
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/screens/info_input/gender_input_screen.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
@@ -65,11 +66,7 @@ class _AgeInputScreenState extends State<AgeInputScreen> {
                     // 안내 텍스트 (로고 바로 아래 중앙 정렬)
                     const Text(
                       "나이를 입력해주세요.",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                      ),
+                      style: AppTextStyles.boldText,
                     ),
 
                     // 프로토타입처럼 텍스트와 입력창 사이에 넉넉한 간격
@@ -82,17 +79,16 @@ class _AgeInputScreenState extends State<AgeInputScreen> {
                         controller: _ageController,
                         // [요구사항 반영] 커서를 왼쪽으로!
                         textAlign: TextAlign.start,
-                        style: const TextStyle(color: Colors.white, fontSize: 14, fontFamily: 'NotoSansKR'),
+                        style: AppTextStyles.etcText.copyWith(
+                          fontFamily: 'NotoSansKR'
+                        ),
                         keyboardType: .number,
                         maxLength: 3,
                         textInputAction: TextInputAction.done,
                         onSubmitted: _validateAndSubmit,
                         decoration: InputDecoration(
                           hintText: "나이를 입력해주세요.",
-                          hintStyle: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.5),
-                            fontSize: 15,
-                          ),
+                          hintStyle: AppTextStyles.hintText,
                           counterText: "",
                           // [요구사항 반영] 왼쪽 테두리에서 글씨가 살짝 떨어지도록 left padding 부여
                           contentPadding: const EdgeInsets.only(left: 24, top: 18, bottom: 12),
@@ -138,11 +134,7 @@ class _AgeInputScreenState extends State<AgeInputScreen> {
                       SizedBox(width: 6), // 아이콘과 글자 사이의 간격
                       Text(
                         '이전',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'NotoSansKR'
-                        ),
+                        style: AppTextStyles.bodyDefault
                       ),
                     ],
                   ),

@@ -1,8 +1,11 @@
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/screens/tarot/tarot_result_screen.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_tarot/widgets/home_background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../constants/pref_keys.dart';
 
 class LovesCardScreen extends StatefulWidget {
   const LovesCardScreen({super.key});
@@ -37,23 +40,18 @@ class _LovesCardScreenState extends State<LovesCardScreen> {
           const Text(
             "인연 타로를 선택하셨네요.\n신중하게 카드 1장을 선택해주세요.",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              height: 1.5,
-            ),
+            style: AppTextStyles.subtitleBold
           ),
           const SizedBox(height: 8),
           const Text(
             "생각하고 있는 그 사람과 인연이 될 수 있을까요?",
-            style: TextStyle(color: Colors.white60, fontSize: 13),
+            style: AppTextStyles.miniText,
           ),
           const Spacer(),
           Text(
             "좌우로 스크롤하여\n카드 한 장을 골라보세요!",
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 16, fontWeight: .w500, fontFamily: 'NotoSansKR'),
+            style: AppTextStyles.bodyMedium,
           ),
           const SizedBox(height: 16),
 
@@ -100,7 +98,7 @@ class _LovesCardScreenState extends State<LovesCardScreen> {
 
                           // 🔥 [수정 1] 키 이름을 'selected_love_card_id'로 바꿉니다!
                           // 🔥 [수정 2] JSON 번호(1~9)와 맞추기 위해 index + 1 을 저장합니다!
-                          await prefs.setInt('selected_love_card_id', index + 1);
+                          await prefs.setInt(PrefKeys.selectedLoveId, index + 1);
 
                           if (!mounted) return;
                           pushPage(context, const TarotResultScreen(tarotType: 'love'));

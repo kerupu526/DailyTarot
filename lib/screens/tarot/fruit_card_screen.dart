@@ -1,9 +1,11 @@
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:daily_tarot/widgets/home_background.dart';
 import 'package:daily_tarot/widgets/tarot_background.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../constants/pref_keys.dart';
 import 'tarot_result_screen.dart';
 
 class FruitCardScreen extends StatefulWidget {
@@ -102,9 +104,9 @@ class _FruitCardScreenState extends State<FruitCardScreen> {
                       child: Image.asset('assets/images/graphic.png', height: 60,),
                     ),
                   ),
-                  Text('열매 타로를 선택하셨네요.\n신중하게 카드 1장을 선택해주세요.', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: .bold), textAlign: .center,),
+                  Text('열매 타로를 선택하셨네요.\n신중하게 카드 1장을 선택해주세요.', style: AppTextStyles.largeBold, textAlign: .center,),
                   SizedBox(height: 8,),
-                  Text('지금 생각하고 있는 일은 어떤 결과로 이어질까요?', style: TextStyle(color: Colors.white, fontFamily: 'NotoSansKR', fontSize: 14),)
+                  Text('지금 생각하고 있는 일은 어떤 결과로 이어질까요?', style: AppTextStyles.etcText.copyWith(color: Colors.white70,fontFamily: 'NotoSansKR'),)
                 ],
               ),
             ),
@@ -135,7 +137,7 @@ class _FruitCardScreenState extends State<FruitCardScreen> {
                               int selectedCardId = _cardIndices[index];
 
                               final prefs = await SharedPreferences.getInstance();
-                              await prefs.setInt('selected_fruit_card_id', selectedCardId);
+                              await prefs.setInt(PrefKeys.selectedFruitId, selectedCardId);
 
                               if (!mounted) return;
 
@@ -161,11 +163,7 @@ class _FruitCardScreenState extends State<FruitCardScreen> {
               child: Center(
                 child: Text(
                   '셔플',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'NotoSansKR'
-                  ),
+                  style: AppTextStyles.bodyDefault
                 ),
               ),
               ),

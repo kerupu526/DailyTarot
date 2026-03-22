@@ -1,4 +1,5 @@
 import 'package:daily_tarot/constants/app_colors.dart';
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/constants/pref_keys.dart';
 import 'package:daily_tarot/screens/tarot/my_soul_card_screen.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
@@ -52,10 +53,34 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
       context: context,
       builder: (context) {
         return Dialog(
-          backgroundColor: const Color(0xFF2C1654), // 다이얼로그 배경색
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 24, 20, 16),
+          backgroundColor: Colors.transparent, // 다이얼로그 배경색
+
+          // 🔥 [핵심 1] 이 녀석이 그라데이션을 덮어버리는 주범입니다! 무조건 투명하게 죽여야 합니다.
+          surfaceTintColor: Colors.transparent,
+
+          // 🔥 [핵심 2] 그림자 색상도 투명하게 해야 테두리(.all)가 깔끔하게 보입니다.
+          shadowColor: Colors.transparent,
+
+          elevation: 0,
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.8,
+            padding: .all(20),
+            // [선수님 코드 원본 그대로]
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: .topLeft,
+                    end: .bottomRight,
+                    colors:[
+                      AppColors.buttonEnd,
+                      AppColors.backgroundBottom
+                    ]
+                ),
+                borderRadius: .circular(20),
+                border: .all(
+                    color: Colors.white.withValues(alpha: 0.2),
+                    width: 1
+                )
+            ),
             child: StatefulBuilder(
               builder: (context, setDialogState) {
                 // 해당 월의 마지막 날짜 계산 (윤년 등 보정)
@@ -86,11 +111,13 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
                     // 타이틀
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(left: 8.0),
                       child: Text(
                         "생년월일 선택",
-                        style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600, fontFamily: 'NotoSansKR'),
+                        style: AppTextStyles.largeBold.copyWith(
+                            fontFamily: 'NotoSansKR'
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -235,7 +262,7 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
                           onTap: () => Navigator.pop(context),
                           child: const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                            child: Text("취소", style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500)),
+                            child: Text("취소", style: AppTextStyles.bodyMedium),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -249,11 +276,13 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
                             setState(() => _selectedDate = picked);
                             Navigator.pop(context);
                           },
-                          child: const Padding(
+                          child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                            child: Text("선택", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'NotoSansKR')),
+                            child: Text("선택", style: AppTextStyles.boldText.copyWith(
+                                fontFamily: 'NotoSansKR'
+                            )),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ],
@@ -297,7 +326,7 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          backgroundColor: const Color(0xFF2C1654),
+          backgroundColor: AppColors.homeBackground,
           title: const Text('달 부족', style: TextStyle(color: Colors.white, fontFamily: 'NotoSansKR')),
           content: const Text('달이 부족합니다.\n충전 후 다시 시도해주세요.', style: TextStyle(color: Colors.white70, fontFamily: 'NotoSansKR')),
           actions:[
@@ -352,9 +381,9 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
           const SizedBox(height: 10),
           Image.asset('assets/images/graphic.png', width: 45), // 가운데 작은 그래픽
           const SizedBox(height: 15),
-          const Text(
+          Text(
             "나의 생일로 알아보는 소울카드",
-            style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400, fontFamily: 'NotoSansKR'),
+            style: AppTextStyles.extraLargeBold
           ),
 
           const SizedBox(height: 40),
@@ -368,9 +397,11 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
                 children:[
                   RichText(
                     textAlign: TextAlign.center,
-                    text: const TextSpan(
+                    text: TextSpan(
                       // 기본 텍스트 스타일
-                      style: TextStyle(color: Colors.white, fontSize: 13, height: 2.2, fontFamily: 'NotoSansKR'),
+                      style: AppTextStyles.storytelling.copyWith(
+                        height: 2.2
+                      ),
                       children:[
                         TextSpan(text: '소울 넘버', style: TextStyle(color: AppColors.highlightYellow, fontWeight: FontWeight.bold)),
                         TextSpan(text: '는 생년월일의 숫자를 모두 더해\n얻는 최종적인 한 자리 숫자로,\n당신의 핵심적인 에너지와 삶의 테마를 나타냅니다.\n이 소울 넘버에 해당하는\n메이저 아르카나 타로 카드가 바로 '),
@@ -378,7 +409,7 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
                         TextSpan(text: '이며,\n이는 당신의 타고난 성격, 기질,\n그리고 삶의 목적을 상징합니다.\n즉, 소울 넘버는 당신의 '),
                         TextSpan(text: '영혼의 번호', style: TextStyle(color: AppColors.highlightYellow, fontWeight: FontWeight.bold)),
                         TextSpan(text: '이고,\n소울 카드는 그 번호가 의미하는\n'),
-                        TextSpan(text: '영혼의 본질', style: TextStyle(color: Color(0xFFFFD600), fontWeight: FontWeight.bold)),
+                        TextSpan(text: '영혼의 본질', style: TextStyle(color: AppColors.highlightYellow, fontWeight: FontWeight.bold)),
                         TextSpan(text: '을 보여주는 상징인 셈입니다.'),
                       ],
                     ),
@@ -432,7 +463,7 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
                         begin: Alignment(-1, -0.8), end: Alignment(0, 1),
                         colors:[AppColors.buttonStart, AppColors.buttonMiddle, AppColors.buttonEnd],
                       ),
-                      boxShadow: const[BoxShadow(color: Color(0x90846881), blurRadius: 5, offset: Offset(0, 6))],
+                      boxShadow: const[BoxShadow(color: AppColors.buttonShadow, blurRadius: 5, offset: Offset(0, 6))],
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -441,7 +472,7 @@ class _SoulCardScreenState extends State<SoulCardScreen> {
                         const SizedBox(width: 10),
                         const Text(
                           '달 10개로 소울카드 찾기',
-                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                          style: AppTextStyles.boldText,
                         ),
                       ],
                     ),

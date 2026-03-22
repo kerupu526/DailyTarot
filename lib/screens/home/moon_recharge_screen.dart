@@ -1,3 +1,5 @@
+import 'package:daily_tarot/constants/app_colors.dart';
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/constants/pref_keys.dart';
 import 'package:daily_tarot/widgets/home_background.dart';
 import 'package:flutter/material.dart';
@@ -96,22 +98,13 @@ class _MoonRechargeScreenState extends State<MoonRechargeScreen> {
           Image.asset('assets/images/graphic.png', width: 70),
           Text(
             "달 충전",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: .w600,
-            ),
+            style: AppTextStyles.extraLargeBold
           ),
           SizedBox(height: 30),
 
           const Text(
             "현재 보유중인 달",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: .w500,
-              fontFamily: 'NotoSansKR',
-            ),
+            style: AppTextStyles.bodyMedium
           ),
           SizedBox(height: 10),
           Row(
@@ -121,12 +114,7 @@ class _MoonRechargeScreenState extends State<MoonRechargeScreen> {
               SizedBox(width: 8),
               Text(
                 '$_currentMoons',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'NotoSansKR',
-                ),
+                style: AppTextStyles.titleBold
               ),
             ],
           ),
@@ -169,27 +157,20 @@ class _MoonRechargeScreenState extends State<MoonRechargeScreen> {
                           children: [
                             Text(
                               "달 ${item['amount']}개",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: .w400,
-                                fontFamily: 'NotoSansKR',
-                              ),
+                              style: AppTextStyles.bodyMedium
                             ),
                             Text(
                               item['discount'],
-                              style: TextStyle(
-                                color: Color(0xffffcf00),
-                                fontSize: 12,
-                                fontWeight: .w500,
-                                fontFamily: 'NotoSansKR',
-                              ),
+                              style: AppTextStyles.miniBold.copyWith(
+                                color: AppColors.highlightYellow,
+                                fontFamily: 'NotoSansKR'
+                              )
                             ),
                           ],
                         ),
                         Spacer(),
 
-                        Text(item['price'], style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: .w400, fontFamily: 'NotoSansKR'),)
+                        Text(item['price'], style: AppTextStyles.bodyMedium)
                       ],
                     ),
                   ),

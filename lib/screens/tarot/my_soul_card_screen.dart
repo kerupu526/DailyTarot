@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/constants/pref_keys.dart';
 import 'package:daily_tarot/screens/home/home_screen.dart';
 import 'package:daily_tarot/services/json_service.dart';
@@ -209,11 +210,7 @@ class _MySoulCardScreenState extends State<MySoulCardScreen>
                   ),
                   Text(
                     '${_cardData!['number']}번 ${_cardData!['name']}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: .w600,
-                      fontSize: 18,
-                    ),
+                    style: AppTextStyles.largeBold
                   ),
                 ],
               ),

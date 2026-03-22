@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/widgets/clock_painter.dart';
 import 'package:flutter/material.dart';
 
@@ -61,10 +62,9 @@ class ClockWidget extends StatelessWidget {
                 alignment: .center,
                 child: Text(
                   isHourMode ? '$value' : '${value.toString().padLeft(2, '0')}',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                  ),
+                  style: AppTextStyles.bodyDefault.copyWith(
+                      fontFamily: '나눔명조'
+                  )
                 ),
               ),
             ),

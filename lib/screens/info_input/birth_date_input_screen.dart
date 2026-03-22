@@ -1,8 +1,10 @@
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/screens/info_input/time_input_screen_dart.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../constants/app_colors.dart';
 import '../../constants/pref_keys.dart';
 import '../../widgets/tarot_background.dart';
 import '../../widgets/custom_progress_bar.dart';
@@ -34,9 +36,11 @@ class _BirthDateInputScreenState extends State<BirthDateInputScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: const Color(0xFF2C1654), // 배경톤에 맞춘 어두운 보라색
+          backgroundColor: AppColors.homeBackground, // 배경톤에 맞춘 어두운 보라색
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          title: const Text('연도와 월 선택', style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'NotoSansKR')),
+          title: Text('연도와 월 선택', style: AppTextStyles.largeText.copyWith(
+              fontFamily: 'NotoSansKR'
+          )),
           content: StatefulBuilder(
             builder: (context, setDialogState) {
               return Row(
@@ -45,9 +49,9 @@ class _BirthDateInputScreenState extends State<BirthDateInputScreen> {
                   Expanded(
                     child: DropdownButton<int>(
                       value: tempYear,
-                      dropdownColor: const Color(0xFF130826),
+                      dropdownColor: AppColors.birthDropDown,
                       isExpanded: true,
-                      style: const TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'NotoSansKR'),
+                      style: AppTextStyles.bodyDefault.copyWith(fontFamily: 'NotoSansKR'),
                       // 1900년부터 현재 연도까지 리스트 생성
                       items: List.generate(130, (i) => DateTime.now().year - i)
                           .map((y) => DropdownMenuItem(value: y, child: Text('$y년')))
@@ -60,9 +64,9 @@ class _BirthDateInputScreenState extends State<BirthDateInputScreen> {
                   Expanded(
                     child: DropdownButton<int>(
                       value: tempMonth,
-                      dropdownColor: const Color(0xFF130826),
+                      dropdownColor: AppColors.birthDropDown,
                       isExpanded: true,
-                      style: const TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'NotoSansKR'),
+                      style: AppTextStyles.bodyDefault.copyWith(fontFamily: 'NotoSansKR'),
                       // 1월부터 12월까지
                       items: List.generate(12, (i) => i + 1)
                           .map((m) => DropdownMenuItem(value: m, child: Text('$m월')))
@@ -142,7 +146,7 @@ class _BirthDateInputScreenState extends State<BirthDateInputScreen> {
                   children:[
                     const Text(
                       "태어난 날짜를 입력해주세요.",
-                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800),
+                      style: AppTextStyles.boldText,
                     ),
                     const SizedBox(height: 30),
 
@@ -151,10 +155,10 @@ class _BirthDateInputScreenState extends State<BirthDateInputScreen> {
                       onTap: _showYearMonthPicker,
                       child: Text(
                         "${_focusedMonth.year}.${_focusedMonth.month}",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                        ),
+                        style: AppTextStyles.titleText.copyWith(
+                            fontFamily: '나눔명조',
+                          fontWeight: .w600
+                        )
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -222,7 +226,7 @@ class _BirthDateInputScreenState extends State<BirthDateInputScreen> {
                       const SizedBox(width: 6),
                       const Text(
                         '이전',
-                        style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'NotoSansKR'),
+                        style: AppTextStyles.bodyDefault,
                       ),
                     ],
                   ),

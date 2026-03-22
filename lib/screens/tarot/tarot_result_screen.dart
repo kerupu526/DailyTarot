@@ -1,3 +1,5 @@
+import 'package:daily_tarot/constants/app_colors.dart';
+import 'package:daily_tarot/constants/app_text_styles.dart';
 import 'package:daily_tarot/screens/home/home_screen.dart';
 import 'package:daily_tarot/services/json_service.dart';
 import 'package:daily_tarot/utils/navigation_helper.dart';
@@ -111,10 +113,14 @@ class _TarotResultScreenState extends State<TarotResultScreen> {
                   _isRevealed ? '카드풀이' : '아래의 타로카드를 선택하셨군요\n결과를 확인해보세요',
                   key: ValueKey<bool>(_isRevealed),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                  style: AppTextStyles.largeBold,
                 ),
               ),
-              SizedBox(height: size.height * 0.04),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOutCubic,
+                height: _isRevealed ? size.height * 0.04 : size.height * 0.10,
+              ),
               AnimatedContainer(
                 duration: const Duration(milliseconds: 600),
                 curve: Curves.easeInOutCubic,
@@ -125,7 +131,7 @@ class _TarotResultScreenState extends State<TarotResultScreen> {
                 ),
               ),
               const SizedBox(height: 15),
-              Text('${_cardData!['number']}. ${_cardData!['name']}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16)),
+              Text('${_cardData!['number']}. ${_cardData!['name']}', style: AppTextStyles.boldText),
 
               Expanded(
                 child: AnimatedOpacity(
@@ -168,7 +174,7 @@ class _TarotResultScreenState extends State<TarotResultScreen> {
                           child: Container(
                             width: 100, height: 40,
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(60), color: Colors.white.withValues(alpha: 0.08)),
-                            child: const Center(child: Text('돌아가기', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500))),
+                            child: Center(child: Text('돌아가기', style: AppTextStyles.etcText.copyWith(fontFamily: 'NotoSansKR'))),
                           ),
                         ),
                       ],
@@ -197,7 +203,7 @@ class _TarotResultScreenState extends State<TarotResultScreen> {
                         borderRadius: BorderRadius.circular(50),
                         gradient: const LinearGradient(
                           begin: Alignment(-1, -0.8), end: Alignment(0, 1),
-                          colors:[Color(0xFF806381), Color(0xFF745074), Color(0xFF432267)],
+                          colors:[AppColors.buttonStart, AppColors.buttonMiddle, AppColors.buttonEnd],
                         ),
                       ),
                       child: const Center(child: Text('결과 확인', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
