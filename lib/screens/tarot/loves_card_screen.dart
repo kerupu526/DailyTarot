@@ -24,6 +24,8 @@ class _LovesCardScreenState extends State<LovesCardScreen> {
   // 현재 중앙에 있는 카드 인덱스 (소수점 = 드래그 중간 상태)
   double _centerIndex = 3.4;
 
+  final List<int> _cardIndices = List.generate(9, (index) => index)..shuffle();
+
   // 중앙에서 멀수록 뒤에 그려지도록 정렬
   List<int> get _paintOrder {
     return List.generate(cardCount, (i) => i); // 그냥 0,1,2,...,8 순서
@@ -86,19 +88,19 @@ class _LovesCardScreenState extends State<LovesCardScreen> {
                       alignment: Alignment.bottomCenter,
                       transform: Matrix4.identity()
                       // 1. 중심점(pivot)으로 이동
-                        ..translateByDouble(0.0, pivotDistance, 0.0, 0.0)
+                        ..translateByDouble(0.0, pivotDistance, 0.0, 1.0)
                       // 2. 그 점 기준으로 회전
                         ..rotateZ(angle)
                       // 3. 다시 원위치
-                        ..translateByDouble(0.0, -pivotDistance, 0.0, 0.0)
+                        ..translateByDouble(0.0, -pivotDistance, 0.0, 1.0)
                         ..scaleByDouble(scale, scale, 1.0, 1.0),
                       child: GestureDetector(
                         onTap: () async {
                           final prefs = await SharedPreferences.getInstance();
 
-                          // 🔥 [수정 1] 키 이름을 'selected_love_card_id'로 바꿉니다!
-                          // 🔥 [수정 2] JSON 번호(1~9)와 맞추기 위해 index + 1 을 저장합니다!
-                          await prefs.setInt(PrefKeys.selectedLoveId, index + 1);
+                          int realCardId = _cardIndices[index] + 1;
+
+                          await prefs.setInt(PrefKeys.selectedLoveId, realCardId);
 
                           if (!context.mounted) return;
                           pushAndRemoveAllPage(context, const TarotResultScreen(tarotType: 'love'));

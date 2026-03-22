@@ -17,6 +17,7 @@ class FruitCardScreen extends StatefulWidget {
 class _FruitCardScreenState extends State<FruitCardScreen> {
   final List<bool> _isCardCentered = List.generate(9, (index) => false);
   final List<int> _cardIndices = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  int _shuffleVersion = 0;
 
   Offset _calculateCardPosition(int index, double gridWidth, double gridHeight, double cardWidth, double cardHeight) {
     // 만약 셔플 중이면? 무조건 정중앙 좌표 반환
@@ -51,31 +52,41 @@ class _FruitCardScreenState extends State<FruitCardScreen> {
   }
 
   Future<void> _startShuffleAnimation() async {
-    // 카드들을 중앙으로 집합
+    // 1. 새로운 셔플 시작을 알리기 위해 버전 업!
+    _shuffleVersion++;
+    // 2. 현재 실행되는 이 함수의 고유 ID를 복사해둡니다.
+    final int currentId = _shuffleVersion;
+
+    // 3. 일단 모든 카드를 중앙으로 모읍니다. (기존 로직)
     setState(() {
-      for (int i = 0; i < 9; i++) {
-        _isCardCentered[i] = true;
-      }
+      for (int i = 0; i < 9; i++) _isCardCentered[i] = true;
     });
 
-    // 카드가 중앙으로 모이는 시간(예: 600ms)동안 대기
-    await Future.delayed(Duration(milliseconds: 600));
+    // 4. 모이는 시간 동안 대기
+    await Future.delayed(const Duration(milliseconds: 600));
 
-    // 눈에 안 보이는 상태에서 뒤에 있는 데이터를 무작위로 섞음
+    // [체크포인트] 대기 중에 버튼이 또 눌렸나? (currentId가 최신이 아니면 중단)
+    if (currentId != _shuffleVersion) return;
+
+    // 5. 카드 데이터 섞기
     setState(() {
       _cardIndices.shuffle();
     });
 
-    // 아주 찰나의 시간 뜸을 들임 (영상처럼)
+    await Future.delayed(const Duration(milliseconds: 300));
+    if (currentId != _shuffleVersion) return;
+
+    // 6. 순서대로 펼치기
     for (int i = 0; i < 9; i++) {
       if (i == 4) {
-        // 정중앙 카드는 이미 자기 자리에 있으므로, 상태만 바꿔주고 딜레이 없이 패스!
         if (mounted) setState(() => _isCardCentered[i] = false);
         continue;
       }
 
-      // 나머지 8장의 카드만 0.1초 간격으로 날려보냄
-      await Future.delayed(const Duration(milliseconds: 300)); // (속도는 선수님 취향껏)
+      await Future.delayed(const Duration(milliseconds: 400)); // 펼치는 간격을 100ms로 줄여서 쾌적하게!
+
+      // [체크포인트] 펼치는 도중에 또 눌렸나? 그럼 즉시 멈춤!
+      if (currentId != _shuffleVersion) return;
 
       if (mounted) {
         setState(() {
